@@ -31,19 +31,20 @@ namespace slideshowy
         private void NextImage()
         {
             Image img = null;
-            string imgpath;
+            string imgpath = null;
             int cnt = 0;
 
             // load the next image
-            do
-            {
-                imgpath = Files[Random.Next(Files.Length)];
-                try
+            if (Files.Any())
+                do
                 {
-                    img = Image.FromFile(imgpath);
-                }
-                catch { }
-            } while (img == null && cnt++ < 10);
+                    imgpath = Files[Random.Next(Files.Length)];
+                    try
+                    {
+                        img = Image.FromFile(imgpath);
+                    }
+                    catch { }
+                } while (img == null && cnt++ < 10);
 
             Picture.Image = img;
             lblPath.Text = img == null ? "Could not find an image to load" : imgpath;
