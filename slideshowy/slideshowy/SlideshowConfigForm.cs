@@ -31,7 +31,7 @@ namespace slideshowy
             get
             {
                 double period;
-                return double.TryParse(txtPeriod.Text, out period) ? period : new double?();
+                return double.TryParse(txtPeriod.Text, out period) && period > 0 ? period : new double?();
             }
         }
 
