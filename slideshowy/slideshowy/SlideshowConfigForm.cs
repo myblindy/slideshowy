@@ -15,7 +15,7 @@ namespace slideshowy
     public partial class SlideshowConfigForm : Form
     {
         private readonly string[] ImageFileExtensions =
-            new[] { ".png", ".jpg", ".gif", ".bmp", ".emf", ".exif", ".jpeg", ".png", ".tiff", ".wmf" };
+            new[] { ".png", ".jpg", ".gif", ".bmp", ".emf", ".exif", ".jpeg", ".png", ".tiff", ".wmf", ".ico" };
 
         public SlideshowConfigForm()
         {
