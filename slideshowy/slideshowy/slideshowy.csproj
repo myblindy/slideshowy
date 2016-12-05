@@ -78,6 +78,7 @@
     <Compile Include="SlideshowForm.Designer.cs">
       <DependentUpon>SlideshowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Win32API.cs" />
     <EmbeddedResource Include="SlideshowConfigForm.resx">
       <DependentUpon>SlideshowConfigForm.cs</DependentUpon>
     </EmbeddedResource>

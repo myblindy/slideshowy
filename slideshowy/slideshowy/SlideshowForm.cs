@@ -12,10 +12,10 @@ namespace slideshowy
 {
     public partial class SlideshowForm : Form
     {
-        private string[] Files;
+        private List<string> Files;
         private Random Random = new Random();
 
-        public SlideshowForm(string[] files, double period)
+        public SlideshowForm(List<string> files, double period)
         {
             InitializeComponent();
 
@@ -35,17 +35,26 @@ namespace slideshowy
             int cnt = 0;
 
             // load the next image
-            if (Files.Any())
-                do
-                {
-                    imgpath = Files[Random.Next(Files.Length)];
-                    try
+            lock (Files)
+                if (Files.Any())
+                    do
                     {
-                        img = Image.FromFile(imgpath);
-                    }
-                    catch { }
-                } while (img == null && cnt++ < 10);
+                        imgpath = Files[Random.Next(Files.Count)];
+                        try
+                        {
+                            img = Image.FromFile(imgpath);
+                        }
+                        catch { }
+                    } while (img == null && cnt++ < 10);
 
+            // free up used memory
+            if (Picture.Image != null)
+            {
+                Picture.Image.Dispose();
+                Picture.Image = null;               // ensure a null img doesn't call dispose twice
+            }
+
+            // and load the image
             Picture.Image = img;
             lblPath.Text = img == null ? "Could not find an image to load" : imgpath;
         }
